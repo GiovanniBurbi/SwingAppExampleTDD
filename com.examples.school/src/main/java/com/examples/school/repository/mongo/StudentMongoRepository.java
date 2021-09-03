@@ -18,10 +18,10 @@ public class StudentMongoRepository implements StudentRepository {
 	public static final String SCHOOL_DB_NAME = "school";
 	private MongoCollection<Document> studentCollection;
 
-	public StudentMongoRepository(MongoClient client) {
+	public StudentMongoRepository(MongoClient client, String databaseName, String collectionName) {
 		studentCollection = client
-			.getDatabase(SCHOOL_DB_NAME)
-			.getCollection(STUDENT_COLLECTION_NAME);
+			.getDatabase(databaseName)
+			.getCollection(collectionName);
 	}
 
 	@Override

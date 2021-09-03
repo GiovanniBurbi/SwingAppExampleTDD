@@ -17,7 +17,8 @@ import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
 
 /**
- * Communicates with a MongoDB server on localhost; start MongoDB with Docker with
+ * Communicates with a MongoDB server on localhost; start MongoDB with Docker
+ * with
  * 
  * <pre>
  * docker run -p 27017:27017 --rm mongo:4.4.3
@@ -34,18 +35,18 @@ public class SchoolControllerIT {
 	private StudentRepository studentRepository;
 
 	private SchoolController schoolController;
+	private static final String SCHOOL_DB_NAME = "school";
+	private static final String STUDENT_COLLECTION_NAME = "student";
 
 	private AutoCloseable closeable;
 
-	private static int mongoPort =
-		Integer.parseInt(System.getProperty("mongo.port", "27017"));
+	private static int mongoPort = Integer.parseInt(System.getProperty("mongo.port", "27017"));
 
 	@Before
 	public void setUp() {
 		closeable = MockitoAnnotations.openMocks(this);
-		studentRepository = new StudentMongoRepository(
-			new MongoClient(
-				new ServerAddress("localhost", mongoPort)));
+		studentRepository = new StudentMongoRepository(new MongoClient("localhost", mongoPort), SCHOOL_DB_NAME,
+				STUDENT_COLLECTION_NAME);
 		// explicit empty the database through the repository
 		for (Student student : studentRepository.findAll()) {
 			studentRepository.delete(student.getId());
@@ -63,8 +64,7 @@ public class SchoolControllerIT {
 		Student student = new Student("1", "test");
 		studentRepository.save(student);
 		schoolController.allStudents();
-		verify(studentView)
-			.showAllStudents(asList(student));
+		verify(studentView).showAllStudents(asList(student));
 	}
 
 	@Test
