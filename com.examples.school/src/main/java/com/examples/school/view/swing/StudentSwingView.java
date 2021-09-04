@@ -1,11 +1,8 @@
 package com.examples.school.view.swing;
 
-import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -44,22 +41,6 @@ public class StudentSwingView extends JFrame implements StudentView {
 
 	private transient SchoolController schoolController;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					StudentSwingView frame = new StudentSwingView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Exception", e);
-				}
-			}
-		});
-	}
 
 	DefaultListModel<Student> getListStudentsModel() {
 		return listStudentsModel;
