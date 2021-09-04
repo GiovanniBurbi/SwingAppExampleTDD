@@ -14,7 +14,6 @@ import com.examples.school.repository.StudentRepository;
 import com.examples.school.repository.mongo.StudentMongoRepository;
 import com.examples.school.view.StudentView;
 import com.mongodb.MongoClient;
-import com.mongodb.ServerAddress;
 
 /**
  * Communicates with a MongoDB server on localhost; start MongoDB with Docker
